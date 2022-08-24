@@ -9,7 +9,8 @@ const configs = {
     template: "/home/renz/Repositories/renzst.github.io/markdowns/template.html",
     contentAnchor: "main",
     sourceDir: "/home/renz/Repositories/renzst.github.io/markdowns/",
-    outputDir: "./dist/"
+    outputDir: "./dist/",
+    titlePrefix: "renz torres | ",
 }
 
 function MDtoJSDOM(filePath) {
@@ -32,19 +33,38 @@ const Page = (content) => {
     return page;
 };
 
-const main = () => {
-    const dir = fs.readdirSync(configs.sourceDir);
-    const files = dir.filter(x => x.includes(".md"));
+const subsite = (source, output) => {
+    const dir = fs.readdirSync(source, {withFileTypes: true})
+
+    const files = dir
+        .map(x => x.name)
+        .filter(f => f.includes(".md"));
+
+    const subdirs = dir
+        .filter(x => x.isDirectory())
+        .map(x => x.name);
 
     for (let file of files) {
         const name = file.slice(0, -3);
-        const content = MDtoJSDOM(path.join(configs.sourceDir, file));
+        const content = MDtoJSDOM(path.join(source, file));
         const page = Page(content);
 
-        page.window.document.title = "renz torres | " + name;
+        page.window.document.title = configs.pref + name;
 
-        fs.writeFileSync(path.join(configs.outputDir, name + ".html"), page.window.document.documentElement.outerHTML);
+        fs.writeFileSync(path.join(output, name + ".html"), page.window.document.documentElement.outerHTML);
     }
-}
+
+    for (let subdir of subdirs) {
+        if (!fs.existsSync(path.join(output, subdir))) {
+            fs.mkdirSync(path.join(output, subdir), 0744);
+        };
+
+        subsite(path.join(source, subdir), path.join(output, subdir));
+    };
+};
+
+const main = () => {
+    subsite(configs.sourceDir, configs.outputDir);
+};
 
 main();
