@@ -49,7 +49,7 @@ const subsite = (source, output) => {
         const content = MDtoJSDOM(path.join(source, file));
         const page = Page(content);
 
-        page.window.document.title = configs.pref + name;
+        page.window.document.title = configs.titlePrefix + name;
 
         fs.writeFileSync(path.join(output, name + ".html"), page.window.document.documentElement.outerHTML);
     }
