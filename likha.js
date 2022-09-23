@@ -9,7 +9,7 @@ const configs = {
     template: "/home/renz/Repositories/renzst.github.io/markdowns/template.html",
     contentAnchor: "main",
     sourceDir: "/home/renz/Repositories/renzst.github.io/markdowns/",
-    outputDir: "./dist/",
+    outputDir: "/home/renz/Repositories/renzst.github.io/",
     titlePrefix: "renz torres | ",
 }
 
