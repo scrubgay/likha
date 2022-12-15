@@ -6,10 +6,10 @@ const {marked} = require('marked');
 const path = require('path');
 
 const configs = {
-    template: "/home/renz/Repositories/renzst.github.io/markdowns/template.html",
+    template: "../scrubgay.github.io/markdowns/template.html",
     contentAnchor: "main",
-    sourceDir: "/home/renz/Repositories/renzst.github.io/markdowns/",
-    outputDir: "/home/renz/Repositories/renzst.github.io/",
+    sourceDir: "../scrubgay.github.io/markdowns/",
+    outputDir: "../scrubgay.github.io/",
     titlePrefix: "renz torres | ",
 }
 
