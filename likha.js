@@ -5,14 +5,6 @@ const fm = require('front-matter');
 const {marked} = require('marked');
 const path = require('path');
 
-const configs = {
-    template: "../scrubgay.github.io/markdowns/template.html",
-    contentAnchor: "main",
-    sourceDir: "../scrubgay.github.io/markdowns/",
-    outputDir: "../scrubgay.github.io/",
-    titlePrefix: "renz torres | ",
-}
-
 function MDtoJSDOM(filePath) {
     const file = fs.readFileSync(filePath, 'utf-8');
     const parsedFile = fm(file); // splits out the front matter into body and attributes
@@ -66,5 +58,13 @@ const subsite = (source, output) => {
 const main = () => {
     subsite(configs.sourceDir, configs.outputDir);
 };
+
+const configs = {
+    template: "../scrubgay.github.io/markdowns/template.html",
+    contentAnchor: "main",
+    sourceDir: "../scrubgay.github.io/markdowns/",
+    outputDir: "../scrubgay.github.io/",
+    titlePrefix: "renz torres | ",
+}
 
 main();
